@@ -1,0 +1,36 @@
+// pre-cond: num_cards < 5
+void deal_cards(Card deck[][13], Hand cards_in_hand, int num_cards)
+{
+	int col = 0, row = 0;
+
+	for (int i = 0; i < num_cards; i++)
+	{
+		// find an unplayed card
+		do {
+			row = rand() % 4;
+			col = rand() % 13;
+		} while (deck[row][col].is_played == 1);
+
+		// copy card to hand
+		cards_in_hand.player_deck[i] = deck[row][col];
+
+		// SET IS_PLAYED TO 0
+		deck[row][col].is_played == 0;
+	}
+}
+
+
+int is_flush(Hand cards_in_hand)
+{
+	int flag = cards_in_hand.player_deck[0].suit, count = 1;
+
+	for (int i = 1; i < 5; i++)
+	{
+		if (cards_in_hand.player_deck[i].suit == flag)
+		{
+			count += 1;
+		}
+	}
+
+	return (count == 5) ? 1 : 0;
+}
